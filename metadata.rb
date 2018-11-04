@@ -1,6 +1,6 @@
-name 'al-xenserver-chef'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+name 'xen-orchestra'
+maintainer 'Shane Greaves'
+maintainer_email 'gravyflex@gmail.com'
 license 'All Rights Reserved'
 description 'Installs/Configures al-xenserver-chef'
 long_description 'Installs/Configures al-xenserver-chef'
@@ -18,3 +18,7 @@ chef_version '>= 12.14' if respond_to?(:chef_version)
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/al-xenserver-chef'
+depends 'nodejs'
+depends 'apt'
+depends 'git'
+depends 'yarn'

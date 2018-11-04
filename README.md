@@ -1,4 +1,6 @@
-# al-xenserver-chef
+# xen-orchestra
 
-TODO: Enter the cookbook description here.
+Quick and Dirty chef install of xen-orchestra on Ubuntu 16.04
+
+https://github.com/vatesfr/xen-orchestra
 

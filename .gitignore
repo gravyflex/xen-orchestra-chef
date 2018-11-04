@@ -5,6 +5,7 @@
 \#*#
 .*.sw[a-z]
 *.un~
+.DS_Store
 
 # Bundler
 Gemfile.lock
@@ -15,6 +16,7 @@ bin/*
 # test kitchen
 .kitchen/
 .kitchen.local.yml
+.kitchen.yml
 
 # Chef
 Berksfile.lock
