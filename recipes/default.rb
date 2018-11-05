@@ -46,6 +46,27 @@ template "#{node['xen']['orchestra']['install_path']}/packages/xo-server/.xo-ser
   action :create
 end
 
+xo_plugins = ['xo-server-transport-slack', 'xo-server-transport-xmpp', 'xo-server-transport-email', 'xo-server-auth-ldap']
+xo_plugins.each do |plugin|
+  link "#{node['xen']['orchestra']['install_path']}/packages/xo-server/node_modules/#{plugin}" do
+    to "#{node['xen']['orchestra']['install_path']}/packages/#{plugin}"
+    link_type :symbolic
+    action :create
+    not_if { File.symlink?("#{node['xen']['orchestra']['install_path']}/packages/xo-server/node_modules/#{plugin}") }
+    notifies :run, 'bash[yarn_update_plugins]', :delayed
+    notifies :restart, 'service[orchestra]', :delayed
+  end
+end
+
+bash 'yarn_update_plugins' do
+  cwd "#{node['xen']['orchestra']['install_path']}/packages/xo-server"
+  code <<-EOH
+    yarn
+    yarn build
+    EOH
+  action :nothing
+end
+
 systemd_unit 'orchestra.service' do
   content <<-EOU.gsub(/^\s+/, '')
     [Unit]
